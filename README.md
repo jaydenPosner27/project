@@ -1,16 +1,27 @@
-#Python project that ranks all songs in an album based on user input
+# Song Ranker
 
-##This project gives users the ability to search for any album, collects the song titles via an API, and allows the user to rank them. A sorting algorithm is used to automatically give each song a number score without the user needing to assign it. This project was built to practice my skills in Python, and because I always wanted to use a program like this but never could find one
+A Python project that ranks all songs in an album based on user input.
 
-##Technologies used:
--Python
--Last.fm API
+## Description
+The Song Ranker program allows users to search for any album, collects the song titles via the Last.fm API, and automatically ranks them using a sorting algorithm. Users do not need to assign scores manually as the program generates numerical scores for each song.
 
-##How to run
+This project was built to practice Python programming and working with APIs, as well as to create a tool that I personally wanted to use.
 
-#clone the repo
+## Technologies Used
+- Python
+- Last.fm API
+- Requests library
+
+## How to Run
+```bash
+# Clone the repository
 git clone https://github.com/jaydenPosner27/song-ranker-project.git
 
+# Navigate into the project folder
 cd song-ranker-project
 
-python
+# Install Dependencies
+pip install requests
+
+# Run the program
+python proj.py
