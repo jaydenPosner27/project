@@ -9,9 +9,8 @@
 ##How to run
 
 #clone the repo
-git clone https://github.com/jaydenPosner27/music.git
+git clone https://github.com/jaydenPosner27/song-ranker-project.git
 
-#cd project
-cd project
+cd song-ranker-project
 
 python
