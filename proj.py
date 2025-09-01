@@ -1,14 +1,13 @@
 import requests
 import string
-import json
+
+
 
 API_KEY = "ad1178859688fbab3634d9904e6c3273"
 
 def normalize(title):
     normalized = str.maketrans('', '', string.punctuation + " ")
     return title.translate(normalized).lower()
-
-
 
 def getSongs(artist, album):
     url = "https://ws.audioscrobbler.com/2.0/"
@@ -22,9 +21,13 @@ def getSongs(artist, album):
 
 
 def compare(allSongs, rankedSongs):
+    print("For the following ranking, you will give each song a ranking of either great, mid, or bad. You may also skip songs by entering the word skip. All capitalization, spaces and punctuation can be disregarded")
+
     for songs in allSongs:
         min = 0
         category = input("Would you say " + songs + " is great, mid, or bad? ").lower()
+        if category == "skip":
+            continue
         while category not in rankedSongs:
             category = input("enter a valid answer ").lower()
         max = len(rankedSongs[category])-1
@@ -46,18 +49,43 @@ def compare(allSongs, rankedSongs):
               rankedSongs[category].insert(min,songs)
               break
             i = int((min+max)/2)
-    print(rankedSongs[category])
     
+def sort(sortedList):
+    weight = 0
+    for buckets in sortedList:
+        i = 0
+        weight = 32/len(sortedList[buckets])
+        match buckets:
+            case "great":
+                max = 100
+            case "mid":
+                max = 67
+            case "bad":
+                max = 33
+            case "scores":
+                return
+        for songs in sortedList[buckets]:
+            sortedList["scores"].append(int(max-weight*i))
+            i= i + 1
 
-
-#def sort()
-    
 
 artistName = input("You will enter the name of a music artist, and one of their albums, then rank the songs. First, enter in the name of the artist whose album you want to rank\n")
 albumName=input("Now enter the name of the album\n")
 rankedList = {
-    "great":[], "mid":[], "bad":[]
+    "great":[], "mid":[], "bad":[], "scores":[]
 }
 songList = getSongs(artistName, albumName)
 compare(songList,rankedList)
+sort(rankedList)
+i = 0
 
+for songs in rankedList["great"]:
+    print(str(songs) + " " + str(rankedList["scores"][i]))
+    i = i + 1
+for songs in rankedList["mid"]:
+    print(str(songs) + " " + str(rankedList["scores"][i]))
+    i = i + 1
+for songs in rankedList["bad"]:
+    print(str(songs) + " " + str(rankedList["scores"][i]))
+    i = i + 1
+    
